@@ -1,0 +1,14 @@
+PROJECT(MyRigidRegistration2D)
+
+FIND_PACKAGE(ITK)
+IF(ITK_FOUND)
+  INCLUDE(${ITK_USE_FILE})
+ELSE(ITK_FOUND)
+  MESSAGE(FATAL_ERROR "ITK not found. Please set ITK_DIR :-)")
+ENDIF(ITK_FOUND)
+
+SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
+
+ADD_EXECUTABLE(MyRigidRegistration2D MyRigidRegistration2D.cxx)
+
+TARGET_LINK_LIBRARIES(MyRigidRegistration2D ITKCommon ITKIO ITKNumerics ITKAlgorithms ITKStatistics )

@@ -1,0 +1,15 @@
+For easy use of ssh from anywhere in Matlab, it is advised to add the ssh2 JAVA library to the Matlab static path.
+
+To add files to the static path, create a javaclasspath.txt file:
+
+1. Create an ASCII text file and name the file javaclasspath.txt in your Matlab preference folder.
+This preference folder location can be found with the command prefdir
+
+2. In this file, simply enter the name of a Java class folder or jar file, one per line. In my case:
+D:\reggui\lib\ssh\ganymed-ssh2-build250\ganymed-ssh2-build250.jar
+
+3. Restart Matlab.
+
+
+Any help to avoid this procedure and enable the use of dynamic path is welcome.
+
