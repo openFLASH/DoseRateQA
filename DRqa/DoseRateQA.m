@@ -607,12 +607,48 @@ inst1 = inst1.append("1,'CT',handles);");
 inst2 = "handles=Import_contour('" + handles.config.files.rtstructFileName + "',";
 inst2 = inst2.append("'all','CT',1,handles);");
 
+% Get a list of all files in the current directory
+outputFolder = [handles.config.files.output_path, '\Outputs\Outputs_beam1'];
+files = dir(outputFolder);
+inst3 = "";
+inst4 = "";
+inst5 = "";
+% Loop through and filter files based on the name containing 'some_text'
+for k = 1:length(files)
+     if contains(files(k).name, 'Dose')
+        fileDose = files(k).name;
+        fprintf('Found DADR map: %s\n', fileDose);        
+        inst3 = "handles=Import_image('" + outputFolder + "','";
+        inst3 = inst3.append(fileDose + "',");
+        inst3 = inst3.append("1,'Dose',handles);");
+    end
+    if contains(files(k).name, 'DADR')
+        fileDADR = files(k).name;
+        fprintf('Found DADR map: %s\n', fileDADR);        
+        inst4 = "handles=Import_image('" + outputFolder + "','";
+        inst4 = inst4.append(fileDADR + "',");
+        inst4 = inst4.append("1,'DADR',handles);");
+    end
+    if contains(files(k).name, 'PDR')
+        filePDR = files(k).name;
+        fprintf('Found PDR map: %s\n', filePDR);
+        inst5 = "handles=Import_image('" + outputFolder + "','";
+        inst5 = inst5.append(filePDR + "',");
+        inst5 = inst5.append("1,'PDR',handles);");
+    end
+end
+
+
+
 inst10 = "handles.image1.Value=2;";
+inst11 = "handles.image2.Value=2;";
+inst12 = "handles.image3.Value=2;";
+inst13 = "handles.image4.Value=2;";
 
 inst98 = "Update_regguiC_GUI(handles);";
 inst99 = "handles=Apply_view_point(handles);";
 inst100 = "Update_regguiC_all_plots(handles);";
 
-instructions = {inst1, inst2, inst98, inst99, inst100, inst10};
+instructions = {inst1, inst2, inst3, inst4, inst5, inst10, inst11, inst12, inst13, inst98, inst99, inst100};
 
 reggui('GUI',1,'dataPath',handles.config.files.output_path,'workflow',instructions);
