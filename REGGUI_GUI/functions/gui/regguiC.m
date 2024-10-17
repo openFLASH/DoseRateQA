@@ -698,54 +698,54 @@ handles = Execute_reggui_instructions(handles);
 nb_new_images = length(handles.images.data) - nb_images;
 nb_new_fields = length(handles.fields.data) - nb_fields;
 % update the display
-% try
-%     cmd = 'handles = Update_regguiC_GUI(handles';
-%     if(nb_new_images>0)
-%         cmd = [cmd,',''show_last_image'''];
-%     else
-%         i = 1;
-%         while(isfield(handles,['image',num2str(i)]))
-%             image_tag = ['image',num2str(i)];
-%             image_str = get(handles.(image_tag),'String');
-%             image_str = image_str(get(handles.(image_tag),'Value'));
-%             images_to_show{i} = image_str;
-%             i = i+1;
-%         end
-%         cmd = [cmd,',''images_to_show'',images_to_show'];
-%     end
-%     if(nb_new_images<0)
-%         handles.contours_to_plot = [];
-%     end
-%     if(nb_new_fields>0)
-%         cmd = [cmd,',''show_last_field'''];
-%     else
-%         i = 1;
-%         while(isfield(handles,['field',num2str(i)]))
-%             field_tag = ['field',num2str(i)];
-%             field_str = get(handles.(field_tag),'String');
-%             field_str = field_str(get(handles.(field_tag),'Value'));
-%             fields_to_show{i} = field_str;
-%             i = i+1;
-%         end
-%         cmd = [cmd,',''fields_to_show'',fields_to_show'];
-%     end
-%     i = 1;
-%     while(isfield(handles,['image',num2str(i)]))
-%         fusion_tag = ['fusion',num2str(i)];
-%         fusion_str = get(handles.(fusion_tag),'String');
-%         fusion_str = fusion_str(get(handles.(fusion_tag),'Value'));
-%         fusions_to_show{i} = fusion_str;
-%         i = i+1;
-%     end
-%     cmd = [cmd,',''fusions_to_show'',fusions_to_show'];
-%     cmd = [cmd,');'];
-%     eval(cmd);
-% catch
-%     disp('Error in GUI update')
-%     err = lasterror;
-%     disp(['    ',err.message]);
-%     disp(err.stack(1));
-% end
+try
+    cmd = 'handles = Update_regguiC_GUI(handles';
+    % if(nb_new_images>0)
+    %     cmd = [cmd,',''show_last_image'''];
+    % else
+        i = 1;
+        while(isfield(handles,['image',num2str(i)]))
+            image_tag = ['image',num2str(i)];
+            image_str = get(handles.(image_tag),'String');
+            image_str = image_str(get(handles.(image_tag),'Value'));
+            images_to_show{i} = image_str;
+            i = i+1;
+        end
+        cmd = [cmd,',''images_to_show'',images_to_show'];
+    % end
+    if(nb_new_images<0)
+        handles.contours_to_plot = [];
+    end
+    if(nb_new_fields>0)
+        cmd = [cmd,',''show_last_field'''];
+    else
+        i = 1;
+        while(isfield(handles,['field',num2str(i)]))
+            field_tag = ['field',num2str(i)];
+            field_str = get(handles.(field_tag),'String');
+            field_str = field_str(get(handles.(field_tag),'Value'));
+            fields_to_show{i} = field_str;
+            i = i+1;
+        end
+        cmd = [cmd,',''fields_to_show'',fields_to_show'];
+    end
+    i = 1;
+    while(isfield(handles,['image',num2str(i)]))
+        fusion_tag = ['fusion',num2str(i)];
+        fusion_str = get(handles.(fusion_tag),'String');
+        fusion_str = fusion_str(get(handles.(fusion_tag),'Value'));
+        fusions_to_show{i} = fusion_str;
+        i = i+1;
+    end
+    cmd = [cmd,',''fusions_to_show'',fusions_to_show'];
+    cmd = [cmd,');'];
+    eval(cmd);
+catch
+    disp('Error in GUI update')
+    err = lasterror;
+    disp(['    ',err.message]);
+    disp(err.stack(1));
+end
 guidata(handles.execute_all_button, handles);
 
 
