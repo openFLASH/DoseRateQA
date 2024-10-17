@@ -1,0 +1,467 @@
+<deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
+  <configuration build-checksum="710172432" file="D:\FVS\Flash_Doserate_QA.prj" location="D:\FVS" name="Flash_Doserate_QA" preferred-package-location="D:\FVS\Flash_Doserate_QA\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+    <param.appname>REGGUI_Flash_Doserate_QA</param.appname>
+    <param.icon />
+    <param.icons />
+    <param.version>2024.10.16</param.version>
+    <param.authnamewatermark>Labarbe | Hotoiu | Vander Stappen</param.authnamewatermark>
+    <param.email>francois.vanderstappen@iba-group.com</param.email>
+    <param.company>IBA</param.company>
+    <param.summary>FLASH Doserate QA powered by REGGUI and MCsquare</param.summary>
+    <param.description>Please install in a path without any spaces.
+Disclaimer: This Doserate QA tool is a packaged version with GUI of the open source code available here: http://www.openflash.software/. It is not a clinical product, nor a commercial product. It can't be sold, and can't be used for any clinical purpose. It is aimed to be a research tool only.</param.description>
+    <param.screenshot>${PROJECT_ROOT}\ConformalFLASH.jpg</param.screenshot>
+    <param.guid />
+    <param.installpath.string>\IBA\REGGUI_Flash_Doserate_QA\</param.installpath.string>
+    <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
+    <param.logo>${PROJECT_ROOT}\logo-OpenReggui_vert.png</param.logo>
+    <param.install.notes>Please install in a path without any spaces</param.install.notes>
+    <param.target.install.notes />
+    <param.intermediate>${PROJECT_ROOT}\REGGUI_Flash_Doserate_QA\for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}\REGGUI_Flash_Doserate_QA\for_redistribution_files_only</param.files.only>
+    <param.output>${PROJECT_ROOT}\REGGUI_Flash_Doserate_QA\for_redistribution</param.output>
+    <param.logdir>${PROJECT_ROOT}\REGGUI_Flash_Doserate_QA</param.logdir>
+    <param.enable.clean.build>false</param.enable.clean.build>
+    <param.user.defined.mcr.options />
+    <param.target.type>subtarget.standalone</param.target.type>
+    <param.support.packages />
+    <param.web.mcr>true</param.web.mcr>
+    <param.package.mcr>false</param.package.mcr>
+    <param.no.mcr>false</param.no.mcr>
+    <param.web.mcr.name>MyAppInstaller_web</param.web.mcr.name>
+    <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
+    <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
+    <param.windows.command.prompt>false</param.windows.command.prompt>
+    <param.create.log>true</param.create.log>
+    <param.log.file>log.txt</param.log.file>
+    <param.native.matlab>false</param.native.matlab>
+    <param.checkbox>false</param.checkbox>
+    <param.example />
+    <param.help.text>Syntax 
+	 REGGUI_Flash_Doserate_QA -? 
+	 REGGUI_Flash_Doserate_QA varargin 
+ Input Arguments 
+	 -?  print help on how to use the application 
+	 varargin  input arguments 
+ Description 
+ 	 Please install in a path without any spaces.
+Disclaimer: This Doserate QA tool is a packaged version with GUI of the open source code available here: http://www.openflash.software/. It is not a clinical product, nor a commercial product. It can't be sold, and can't be used for any clinical purpose. It is aimed to be a research tool only.</param.help.text>
+    <unset>
+      <param.icon />
+      <param.icons />
+      <param.authnamewatermark />
+      <param.email />
+      <param.company />
+      <param.guid />
+      <param.installpath.string />
+      <param.installpath.combo />
+      <param.target.install.notes />
+      <param.enable.clean.build />
+      <param.user.defined.mcr.options />
+      <param.target.type />
+      <param.support.packages />
+      <param.web.mcr />
+      <param.package.mcr />
+      <param.no.mcr />
+      <param.web.mcr.name />
+      <param.package.mcr.name />
+      <param.no.mcr.name />
+      <param.native.matlab />
+      <param.checkbox />
+      <param.example />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\DRqa\DoseRateQA.m</file>
+    </fileset.main>
+    <fileset.resources />
+    <fileset.package>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openMCsquare</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\scanners_and_BDL</file>
+    </fileset.package>
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\DRqa\DoseRateQA.fig</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\DRqa\runDRqa.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\DRqa\runGetDoseTiming.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\libs\fzsearch\fzsearch.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\libs\fzsearch\stdis.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\libs\jsonlab\jsonopt.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\libs\jsonlab\loadjson.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\libs\jsonlab\mergestruct.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\libs\jsonlab\savejson.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\libs\jsonlab\struct2jdata.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\libs\jsonlab\varargin2struct.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\addBorder2mask.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\apertureContour2Block.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\CEMcontourPlot.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\collectSpotsinBeamlets.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\computeDoseWithCEF.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\ComputeFinalDoseRate.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\configMiropt_RS.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\createHighResCT.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\createHistory.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\DICOM2PXLindex.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\doseAveragedDoseRate.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\DRaEstimate.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\elvMap2mask.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\energyAfterRangeShifter.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\exportCEM2STL.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\fC_logAnalysis.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\findApertureBlockSize.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\fitEllipse.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\flashAlgo_G3.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\flashLoadAndCompute.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\get_beamEvent_info.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getApertureThickness.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getBEVsize.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getCTaxes.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getDICOMcoord.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getDistances2.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getDRa.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getIsocenterToBlockTrayDistance.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getIsocenterToRangeModulatorDistance.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getLatticeInfo.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getMachineParam.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getMaterialPropCT.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getOutputDir.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getParamSnout.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getPrivateTag.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getRangeShifterWet.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getRSThickness.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getScanalgoTiming.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getScanSpeed.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getSpotDeliveryTime.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getSweepTime.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getTalignedWithL.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\getTopologicalMaps.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\interpolateCT.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\interSpotDistance.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\isPtinGrd.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\load_BDL.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\loadEmptyStructs.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\loadRSctScan.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\magnification.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\materialDescription.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\optimizeTrajectory.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\orderALongScarves.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\overwriteWithLogs.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\parseFLASHplan.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\plan2weight.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\plotDoseRate.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\plotTrajectory.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\project2Plane.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\PXLindex2DICOM.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\removeDuplicates.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\save2Disk.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\saveSpotTiming.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\scalarProd.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\scan2Neighbor.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\sconv2.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\setCEMinhrCT.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\setFlashDICOMdict.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\stlwrite.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\updatePlanCTparam.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\walkBranches.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\openFLASH\WETFromThickness.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Add_Default_MC2_SimuParams.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\aggregate_PBS_paintings.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\check_existing_names.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\compute_beam_axis.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\compute_beam_isoplane.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\compute_distmap.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\compute_DVH_NoGUI.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Compute_SPR_data.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\ComputeFinalDose.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\convert_logs_xdr.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\convert_PBS_timing.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\convert_Plan_PBS.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\copyFields.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\correct_beam_angles_for_orientation.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\countScenarios.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\create_default_dicom_header.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Create_default_info.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Create_patient_dose_info.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\createDICOMPlan.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Crop_body_contour.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Data2data.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Data2field.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Data2image.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\defcolors.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Dicom_to_MC2_coordinates.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\DilateROI.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\dir_without_hidden.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\elastic_smoother.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\energy2range.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Export_field.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Export_image.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Export_MC2_Config.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Export_MC2_CT.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Export_MC2_Field.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\fem_3D_local.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\fem_Aij.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\field_convert.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Field_exponential.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\field_exponentiation.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\fileparts2.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\find_burst_switchings.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\find_csv_column.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\findClosestString.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\gauss_leg_cube.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\gaussian_kernel.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Generate_MC2_Config.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\get_beam_info_from_log_beamfile.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\get_beam_params.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\get_csv_data.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\get_image_scale.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Get_reggui_data.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\get_sad.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\getMachineFromBDL.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\getNumberLogicalCores.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\getNumberOfRangeShifters.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\getRangeShifterMaterialFromBDL.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\getROIByName.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\HU_convert.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Image_list.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Import_contour.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Import_data.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Import_image.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Import_MC2_MHD_image.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Import_plan.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Import_tx_records.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Initialize_reggui_handles.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\isDoseOrDoseRate.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\linear_deformation.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\linspaceNDim.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\load_3D_DICOM.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\load_BRF.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\load_DICOM_RT_Plan.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\load_DICOM_RT_Records.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\load_Dose.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\load_Dose_serie.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\load_Field.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\load_Gate_Plan.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\load_IBA_logs.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\load_Image.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\load_JSON_Plan.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\load_OPG.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\load_PET_serie.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\load_Plan.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\load_PLD.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\load_PLD_folder.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\matDICOM2IECgantry.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\MC2_compute.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\MC2_import_ElecDensity.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\MC2_import_scanner_file.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\MC2_import_SP_data.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\MC2_simulation.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\MCsquare_advanced_GUI.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\MCsquare_Param_GUI.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\mha_read_header.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\mha_read_volume.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\MU_to_NumProtons.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\new_line.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\newbox.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\newboxes.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\newcolor.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\newcolors.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\newimage.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\newlines.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\newmask.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\newmasks.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\newpatient.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\newregi.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\newregion.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\newregis.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\newunits.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\nii_read_header.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\nii_read_volume.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\normalize_vcts.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\open_meta.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\orthanc_get_info.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\orthanc_import_from_disk.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\orthanc_save_to_disk.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\pbs_convert_ScanAlgo.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\physicsConstants.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\pitch.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Prepare_CT_for_MC2.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Prepare_deformation_fields.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Prepare_Plan_for_MC2.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Project_on_isoplane.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\range2energy.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\range2energy_IBA.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\ray_tracing.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\read_dicomrtstruct.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\reg_accumulation.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\reg_animate.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\reg_animate2D.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\reg_create.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\reg_deformation.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\reg_displacement_estimation.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\reg_init.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\reg_input.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\reg_new.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\reg_prototype.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\reg_regularisation.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\reg_resampling.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\reggui_logger.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Registration_ITK_rigid.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Registration_ITK_rigid_multimodal.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Registration_modules.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Registration_rigid.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\regularisation_elastic.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Remove_all_fields.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\remove_bad_chars.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Remove_data.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Remove_field.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Remove_image.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\remove_special_chars.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Resample_all.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Resample_image.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\resampler3.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\rigid_deformation.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\rigid_trans_inversion.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\rigid_trans_to_def_field.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Robustness_analysis.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\roll.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\rot.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\rounding.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\roundsd.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\roundsdm.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\save_4D.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\save_Field.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\save_Image.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Save_MC2_Plan.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\save_Transform.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\Set_reggui_data.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\spin_calc.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\standard_resampler.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\timeConverter.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\timenum_s.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\timestr_us.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\trans.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI\urlread2.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\addpath_reggui.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\Apply_view_point.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\are_you_physician.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\Create_indicators.fig</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\Create_indicators.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\Create_PBS_plan.fig</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\Create_PBS_plan.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\dose_volume_histograms.fig</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\dose_volume_histograms.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\filters_list.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\image_edit.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\image_viewer.fig</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\image_viewer.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\image_viewer_3D.fig</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\image_viewer_3D.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\margin_recipe.fig</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\margin_recipe.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\pacs_list.fig</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\pacs_list.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\patient_file.fig</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\patient_file.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\patient_file_update_txt.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\plot_dose_volume_histogram.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\reggui_instruction_history.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\reggui_instructions.fig</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\reggui_instructions.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\reggui_properties.fig</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\reggui_properties.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\regguiC.fig</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\regguiC.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\registration_modules_params.fig</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\registration_modules_params.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\registration_params.fig</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\registration_params.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\renderer.fig</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\renderer.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\rendering_list.fig</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\rendering_list.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\resample_resize.fig</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\resample_resize.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\timeline_logo.png</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\Update_regguiC_all_plots.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\Update_regguiC_colorbar.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\Update_regguiC_GUI.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\Update_regguiC_lists.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\gui\Update_regguiC_plot.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\Export_contour.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\Export_contour_to_mesh.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\Export_data.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\Export_DVH.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\Export_indicators.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\Export_instructions.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\Export_plan.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\Export_reg.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\Export_transform_and_field.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\Import_binary_image.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\Import_dvhs.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\Import_field.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\Import_indicators.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\Import_instructions.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\Import_reg.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\load_Indicators.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\Save_Contour.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\save_DVH.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\save_Indicators.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\save_Plan_PBS.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\io\save_to_vtk.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\registration\quadphase_lsq.mat</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\Addframe.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\Automatic.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\cell2str.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\Center_on_plan_isocenter.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\check_plan_header_consistency.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\Composition.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\Compute_mesh.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\DVH_computation.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\Empty_image.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\Execute_reggui_instructions.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\find_contour.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\get_reggui_frame.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\get_reggui_path.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\listing_dicom_data.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\ManualSegmentation.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\mydatenum.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\Open_reggui_handles.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\plot_reggui_contours.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\plot_reggui_difference.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\plot_reggui_fusion.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\Remove_all_images.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\remove_html_from_str.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\Remove_Instruction.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\remove_low_MU_spots.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\safe_label2rgb.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\functions\tools\Save_reggui_handles.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\lib\mat\explorestruct\explore_plan.m</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\lib\mex\conv3D\conv3f.mexw64</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\lib\mex\field_application\field_application.mexw64</file>
+      <file>${PROJECT_ROOT}\REGGUI_Doserate_QA\REGGUI_GUI\reggui.m</file>
+    </fileset.depfun>
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}\REGGUI_Flash_Doserate_QA\for_testing" name="REGGUI_Flash_Doserate_QA.exe" optional="false">D:\FVS\REGGUI_Flash_Doserate_QA\for_testing\REGGUI_Flash_Doserate_QA.exe</file>
+      <file location="${PROJECT_ROOT}\REGGUI_Flash_Doserate_QA\for_testing" name="splash.png" optional="false">D:\FVS\REGGUI_Flash_Doserate_QA\for_testing\splash.png</file>
+      <file location="${PROJECT_ROOT}\REGGUI_Flash_Doserate_QA\for_testing" name="readme.txt" optional="true">D:\FVS\REGGUI_Flash_Doserate_QA\for_testing\readme.txt</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2024a</root>
+      <toolboxes />
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
