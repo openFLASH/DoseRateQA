@@ -23,7 +23,7 @@ function varargout = DoseRateQA(varargin)
 
 % Edit the above text to modify the response to help DoseRateQA
 
-% Last Modified by GUIDE v2.5 15-Oct-2024 13:30:37
+% Last Modified by GUIDE v2.5 16-Oct-2024 20:45:02
 
 % Begin initialization code - DO NOT EDIT
 
@@ -616,5 +616,3 @@ inst100 = "Update_regguiC_all_plots(handles);";
 instructions = {inst1, inst2, inst98, inst99, inst100, inst10};
 
 reggui('GUI',1,'dataPath',handles.config.files.output_path,'workflow',instructions);
-
-
