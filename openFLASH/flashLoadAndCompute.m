@@ -116,7 +116,7 @@ end
 % with the log records
 if ~isempty(spots)
   fprintf('Overwriting spot info with record from logs \n')
-  %spots = mergeSeqSpots(spots);
+  spots = mergeSeqSpots(spots);
   if isfield(spots.spots , 'metersetRate') && ~isfield(spots.spots , 'effectiveDuration')
     %Compute effective duration from metersetRate
     fprintf('Computing effective duration from metersetrate \n')
