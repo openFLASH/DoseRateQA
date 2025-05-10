@@ -55,7 +55,7 @@ if(isfield(handles.ancest,'dvhs'))
 else
     handles.dvhs = {};
 end
-handles.interval = [0 100];
+handles.interval = [0 200];
 handles.legend = cell(0);
 
 % update GUI
