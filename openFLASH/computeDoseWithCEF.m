@@ -107,6 +107,27 @@ function [Plan , MinDose , MaxDose , DoseOrig] = computeDoseWithCEF(Plan, output
     Plan.FileName = 'Plan';
     createDICOMPlan(Plan,Plan.CTinfo,outputPath,Plan.DICOMdict)
 
+    % Cropping the CT on the specified external Body. Replacing other voxels by -1000
+    Body_contour = [];
+    for i=1:length(handles.images.name)
+        if(strcmp(handles.images.name{i},Plan.ExternalROI))
+            Body_contour = handles.images.data{i};
+        end
+    end
+    for i=1:length(handles.images.name)
+        if(strcmp(handles.images.name{i},Plan.CTname))
+            ctIndex = i;
+        end
+    end
+    if(isempty(Body_contour))
+        disp([Plan.ExternalROI ' contour not found. No crop applied.'])
+    
+    else
+        disp(['Cropped CT on External Body ROI ' Plan.ExternalROI])
+        handles.images.data{ctIndex}(Body_contour < 0.5) = -1000;
+    end
+
+
     %GEt the deepest Zg at which the dose should be computed
     Body = Get_reggui_data(handles , Plan.ExternalROI);
     Zdistal = getZdistal(Body , handles.spacing , handles.origin , Plan.Beams); % |Zdistal| -_SCLAR_-  Z Coordinate (mm) in the IEC gantry CS of the deepest plane in which the dose is to be computed
@@ -474,6 +495,7 @@ end
     Plan2.BDL = Plan.BDL;
     Plan2.protonsFullDose = Plan.protonsHighResDose;
     Plan2.CTinfo = PlanMono.CTinfo;
+    Plan2.ExternalROI = Plan.ExternalROI;
 
     %Compute the dose using MCsquare on the high resolution CT scan
     %Define the MCsquare parameter to do the dose scoring on a different pixel size than the high resolution CT scan

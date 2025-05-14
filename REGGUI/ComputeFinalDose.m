@@ -88,7 +88,6 @@ SimuParam.LET = 0; %Compute the LET
 SimuParam.LETName  = 'LET_final_miropt';
 SimuParam.DoseToWater = 0;
 SimuParam.CropBody = 0;
-SimuParam.BodyContour = '';
 SimuParam.OverwriteHU = {};
 SimuParam.DoseToWater = 1; % use Dose to water by default
 
