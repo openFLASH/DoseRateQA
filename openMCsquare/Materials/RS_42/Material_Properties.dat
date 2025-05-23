@@ -1,0 +1,16 @@
+Name 	 RS_42
+Molecular_Weight 	  0.0 	 # N.C
+Density  	 2.187230 	  # in g/cm3
+Electron_Density  	 677315248663834751139840.000000 	 # in cm-3
+Radiation_Length 	  26.7356 	  # in g/cm2
+
+ Nuclear_Data 	 Mixture 7 	  # mixture with 7 components
+
+ # Label 	  Name 	 fraction by mass
+Mixture_Component 	 1 	 hydrogen 	 3.876026
+Mixture_Component 	 2 	 carbon 	 11.843732
+Mixture_Component 	 3 	 nitrogen 	 3.704192
+Mixture_Component 	 4 	 oxygen 	 36.606674
+Mixture_Component 	 5 	 aluminium 	 17.948126
+Mixture_Component 	 7 	 phosphorus 	 8.613847
+Mixture_Component 	 8 	 calcium 	 17.226872

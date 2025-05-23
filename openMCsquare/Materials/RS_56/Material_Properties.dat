@@ -1,0 +1,11 @@
+Name 	 RS_56
+Molecular_Weight 	  0.0 	 # N.C
+Density  	 7.353000 	  # in g/cm3
+Electron_Density  	 2064439065281667765633024.000000 	 # in cm-3
+Radiation_Length 	  14.0743 	  # in g/cm2
+
+ Nuclear_Data 	 Mixture 2 	  # mixture with 2 components
+
+ # Label 	  Name 	 fraction by mass
+Mixture_Component 	 5 	 aluminium 	 3.948043
+Mixture_Component 	 9 	 iron 	 96.051957

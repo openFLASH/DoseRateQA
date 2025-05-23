@@ -1,0 +1,14 @@
+Name 	 RS_15
+Molecular_Weight 	  0.0 	 # N.C
+Density  	 0.729883 	  # in g/cm3
+Electron_Density  	 244032489597422029242368.000000 	 # in cm-3
+Radiation_Length 	  40.6321 	  # in g/cm2
+
+ Nuclear_Data 	 Mixture 5 	  # mixture with 5 components
+
+ # Label 	  Name 	 fraction by mass
+Mixture_Component 	 1 	 hydrogen 	 11.287568
+Mixture_Component 	 2 	 carbon 	 54.258066
+Mixture_Component 	 3 	 nitrogen 	 1.219545
+Mixture_Component 	 4 	 oxygen 	 33.212067
+Mixture_Component 	 7 	 phosphorus 	 0.022753

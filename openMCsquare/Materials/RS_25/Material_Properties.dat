@@ -1,0 +1,15 @@
+Name 	 RS_25
+Molecular_Weight 	  0.0 	 # N.C
+Density  	 1.269641 	  # in g/cm3
+Electron_Density  	 411596719381127391870976.000000 	 # in cm-3
+Radiation_Length 	  32.4849 	  # in g/cm2
+
+ Nuclear_Data 	 Mixture 6 	  # mixture with 6 components
+
+ # Label 	  Name 	 fraction by mass
+Mixture_Component 	 1 	 hydrogen 	 8.019918
+Mixture_Component 	 2 	 carbon 	 11.432687
+Mixture_Component 	 3 	 nitrogen 	 3.779948
+Mixture_Component 	 4 	 oxygen 	 64.801030
+Mixture_Component 	 7 	 phosphorus 	 4.951286
+Mixture_Component 	 8 	 calcium 	 6.942376

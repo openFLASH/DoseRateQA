@@ -1,0 +1,15 @@
+Name 	 RS_34
+Molecular_Weight 	  0.0 	 # N.C
+Density  	 1.755424 	  # in g/cm3
+Electron_Density  	 553211359062618519109632.000000 	 # in cm-3
+Radiation_Length 	  27.9296 	  # in g/cm2
+
+ Nuclear_Data 	 Mixture 6 	  # mixture with 6 components
+
+ # Label 	  Name 	 fraction by mass
+Mixture_Component 	 1 	 hydrogen 	 5.111235
+Mixture_Component 	 2 	 carbon 	 14.081666
+Mixture_Component 	 3 	 nitrogen 	 4.428130
+Mixture_Component 	 4 	 oxygen 	 46.986505
+Mixture_Component 	 7 	 phosphorus 	 9.846175
+Mixture_Component 	 8 	 calcium 	 19.343573

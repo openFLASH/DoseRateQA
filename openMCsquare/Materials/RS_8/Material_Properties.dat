@@ -1,0 +1,14 @@
+Name 	 RS_8
+Molecular_Weight 	  0.0 	 # N.C
+Density  	 0.352053 	  # in g/cm3
+Electron_Density  	 117113800792555137269760.000000 	 # in cm-3
+Radiation_Length 	  38.0904 	  # in g/cm2
+
+ Nuclear_Data 	 Mixture 5 	  # mixture with 5 components
+
+ # Label 	  Name 	 fraction by mass
+Mixture_Component 	 1 	 hydrogen 	 10.713571
+Mixture_Component 	 2 	 carbon 	 28.294438
+Mixture_Component 	 3 	 nitrogen 	 2.696420
+Mixture_Component 	 4 	 oxygen 	 58.167360
+Mixture_Component 	 7 	 phosphorus 	 0.128210

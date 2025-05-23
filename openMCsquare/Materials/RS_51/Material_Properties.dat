@@ -1,0 +1,16 @@
+Name 	 RS_51
+Molecular_Weight 	  0.0 	 # N.C
+Density  	 2.673012 	  # in g/cm3
+Electron_Density  	 777829809386528371113984.000000 	 # in cm-3
+Radiation_Length 	  24.1169 	  # in g/cm2
+
+ Nuclear_Data 	 Mixture 7 	  # mixture with 7 components
+
+ # Label 	  Name 	 fraction by mass
+Mixture_Component 	 1 	 hydrogen 	 0.166914
+Mixture_Component 	 2 	 carbon 	 0.510029
+Mixture_Component 	 3 	 nitrogen 	 0.159514
+Mixture_Component 	 4 	 oxygen 	 1.576399
+Mixture_Component 	 5 	 aluminium 	 96.466588
+Mixture_Component 	 7 	 phosphorus 	 0.370939
+Mixture_Component 	 8 	 calcium 	 0.741844

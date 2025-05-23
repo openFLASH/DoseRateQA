@@ -1,0 +1,15 @@
+Name 	 RS_28
+Molecular_Weight 	  0.0 	 # N.C
+Density  	 1.431569 	  # in g/cm3
+Electron_Density  	 458801596707833624133632.000000 	 # in cm-3
+Radiation_Length 	  30.4546 	  # in g/cm2
+
+ Nuclear_Data 	 Mixture 6 	  # mixture with 6 components
+
+ # Label 	  Name 	 fraction by mass
+Mixture_Component 	 1 	 hydrogen 	 6.828978
+Mixture_Component 	 2 	 carbon 	 12.517293
+Mixture_Component 	 3 	 nitrogen 	 4.045342
+Mixture_Component 	 4 	 oxygen 	 57.506996
+Mixture_Component 	 7 	 phosphorus 	 6.955465
+Mixture_Component 	 8 	 calcium 	 12.019961

@@ -1,0 +1,11 @@
+Name 	 RS_1
+Molecular_Weight 	  0.0 	 # N.C
+Density  	 0.000605 	  # in g/cm3
+Electron_Density  	 181871506297876217856.000000 	 # in cm-3
+Radiation_Length 	  36.6088 	  # in g/cm2
+
+ Nuclear_Data 	 Mixture 2 	  # mixture with 2 components
+
+ # Label 	  Name 	 fraction by mass
+Mixture_Component 	 3 	 nitrogen 	 75.500000
+Mixture_Component 	 4 	 oxygen 	 24.500000

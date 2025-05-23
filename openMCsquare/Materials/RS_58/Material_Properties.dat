@@ -1,0 +1,10 @@
+Name 	 RS_58
+Molecular_Weight 	  0.0 	 # N.C
+Density  	 8.400000 	  # in g/cm3
+Electron_Density  	 2313129308919515792277504.000000 	 # in cm-3
+Radiation_Length 	  12.6973 	  # in g/cm2
+
+ Nuclear_Data 	 Mixture 1 	  # mixture with 1 components
+
+ # Label 	  Name 	 fraction by mass
+Mixture_Component 	 10 	 copper 	 100.000000

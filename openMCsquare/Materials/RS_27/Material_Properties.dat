@@ -1,0 +1,15 @@
+Name 	 RS_27
+Molecular_Weight 	  0.0 	 # N.C
+Density  	 1.377593 	  # in g/cm3
+Electron_Density  	 443066623124774139723776.000000 	 # in cm-3
+Radiation_Length 	  31.0508 	  # in g/cm2
+
+ Nuclear_Data 	 Mixture 6 	  # mixture with 6 components
+
+ # Label 	  Name 	 fraction by mass
+Mixture_Component 	 1 	 hydrogen 	 7.194548
+Mixture_Component 	 2 	 carbon 	 12.184363
+Mixture_Component 	 3 	 nitrogen 	 3.963876
+Mixture_Component 	 4 	 oxygen 	 59.745972
+Mixture_Component 	 7 	 phosphorus 	 6.340262
+Mixture_Component 	 8 	 calcium 	 10.461347

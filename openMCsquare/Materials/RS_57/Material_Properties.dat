@@ -1,0 +1,12 @@
+Name 	 RS_57
+Molecular_Weight 	  0.0 	 # N.C
+Density  	 2.552727 	  # in g/cm3
+Electron_Density  	 740835667558209603764224.000000 	 # in cm-3
+Radiation_Length 	  23.9697 	  # in g/cm2
+
+ Nuclear_Data 	 Mixture 3 	  # mixture with 3 components
+
+ # Label 	  Name 	 fraction by mass
+Mixture_Component 	 5 	 aluminium 	 98.875000
+Mixture_Component 	 6 	 silicon 	 0.450000
+Mixture_Component 	 9 	 iron 	 0.200000

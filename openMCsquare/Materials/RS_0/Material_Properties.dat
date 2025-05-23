@@ -1,0 +1,10 @@
+Name 	 RS_0
+Molecular_Weight 	  0.0 	 # N.C
+Density  	 0.000001 	  # in g/cm3
+Electron_Density  	 0.000001 	 # in cm-3
+Radiation_Length 	  63.047 	  # in g/cm2
+
+ Nuclear_Data 	 Mixture 1 	  # mixture with 1 components
+
+ # Label 	  Name 	 fraction by mass
+Mixture_Component 	 1 	 hydrogen 	 100.000000

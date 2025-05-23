@@ -1,0 +1,14 @@
+Name 	 RS_21
+Molecular_Weight 	  0.0 	 # N.C
+Density  	 1.053738 	  # in g/cm3
+Electron_Density  	 348855646270754043985920.000000 	 # in cm-3
+Radiation_Length 	  36.724 	  # in g/cm2
+
+ Nuclear_Data 	 Mixture 5 	  # mixture with 5 components
+
+ # Label 	  Name 	 fraction by mass
+Mixture_Component 	 1 	 hydrogen 	 10.166513
+Mixture_Component 	 2 	 carbon 	 13.974943
+Mixture_Component 	 3 	 nitrogen 	 3.773735
+Mixture_Component 	 4 	 oxygen 	 71.728252
+Mixture_Component 	 7 	 phosphorus 	 0.356557

@@ -1,0 +1,11 @@
+Name 	 RS_53
+Molecular_Weight 	  0.0 	 # N.C
+Density  	 4.251000 	  # in g/cm3
+Electron_Density  	 1211745578532786514427904.000000 	 # in cm-3
+Radiation_Length 	  17.3532 	  # in g/cm2
+
+ Nuclear_Data 	 Mixture 2 	  # mixture with 2 components
+
+ # Label 	  Name 	 fraction by mass
+Mixture_Component 	 5 	 aluminium 	 47.802805
+Mixture_Component 	 9 	 iron 	 52.197195
