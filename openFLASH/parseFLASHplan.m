@@ -148,7 +148,7 @@ function [handles, Plan] = parseFLASHplan(planFileName , Plan, handles)
           else
             fprintf('Inozzle already defined in variable Plan \n')
           end
-        fprintf('Proton beam current (theoretical) : %f nA \n', Plan.Inozzle)
+        fprintf('Proton beam current (theoretical, not used for log-based) : %f nA \n', Plan.Inozzle)
 
 
         %Read the aperture data
