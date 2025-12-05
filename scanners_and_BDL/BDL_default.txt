@@ -1,0 +1,25 @@
+Machine_Name = Machine
+Machine_Type = PROTEUSplus
+
+Nozzle exit to Isocenter distance
+1000
+
+SMX to Isocenter distance
+2000
+
+SMY to Isocenter distance
+2000
+
+Range Shifter parameters
+RS_ID = RS_Block
+RS_type = binary
+RS_material = 5
+RS_density = 2.6989
+RS_WET = 74.1
+
+Beam parameters
+2 energies
+
+NominalEnergy	MeanEnergy	EnergySpread	ProtonsMU	Weight1	SpotSize1x	Divergence1x	Correlation1x	SpotSize1y	Divergence1y	Correlation1y	Weight2	SpotSize2x	Divergence2x	Correlation2x	SpotSize2y	Divergence2y	Correlation2y	SpotTilt
+220                 230    0.09980206055963           145000000       1      5.636602318798   0.001933138726263    -0.1122076915985      5.636602318798   0.001933138726263    -0.1122076915985  0      12.68607362234  0.0006738147414591   -0.02984689768771      11.76340665295 -0.0003553257269092     0.0246316358829    0
+228      			230    0.09980206055963           145000000       1      5.636602318798   0.001933138726263    -0.1122076915985      5.636602318798   0.001933138726263    -0.1122076915985  0      12.68607362234  0.0006738147414591   -0.02984689768771      11.76340665295 -0.0003553257269092     0.0246316358829    0
