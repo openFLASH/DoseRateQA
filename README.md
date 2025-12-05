@@ -43,7 +43,8 @@ All inputs are to be provided through the GUI
   * The dose map
   * The DADR map
   * The PBSDR map
-  You and visualise these maps along the traditionnal cartesian views (Sagittal 
+  
+  You and visualise these maps along the traditionnal anatomical planes (Axial, Sagittal, Coronal). From the REGGUI interface, you can easily generate DVH and DRVH (dose rate volume histograms), via the menu ***Algorithms => Other Operations => DVH***.
 
 
 ## License
