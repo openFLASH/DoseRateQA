@@ -21,6 +21,7 @@ All inputs are to be provided through the GUI
 * Log file (ZIP)
 * Beam Data Library (MCsquare format, see http://www.openmcsquare.org/documentation_commissioning.html#BDL_format)
 * CT Scanner calibration (MCsquare format, see http://www.openmcsquare.org/documentation_CT_calibration.html)
+* The folder with the MCsquare executables (by default, downloaded under openMCsquare)
 * A few parameters:
   * The Dose threshold: only applied to the average DADR in the PTV computation
   * Nb of protons: per beamlet, for the Monte Carlo simulation
