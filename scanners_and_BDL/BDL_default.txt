@@ -1,4 +1,4 @@
---Beam model (double gaussian)--
+--UPenn beam model (double gaussian)--
 # Beam data library 
 
 Machine_Name = ConformalFLASH
