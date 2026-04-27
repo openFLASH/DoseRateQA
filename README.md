@@ -5,6 +5,7 @@ Computes Dose Rate metrics based on machine logs for a ConformalFLASH irradiatio
 
 * Matlab 
 * Image Processing toolbox
+* JAVA (for logs extraction). Version 11 is recommended. Can be downloaded here: https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html 
 
 ## Getting started
 
