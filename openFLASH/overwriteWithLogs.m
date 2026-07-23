@@ -68,8 +68,11 @@ function Plan = overwriteWithLogs(Plan, spots)
 
   %Update the spot info in |Plan.Beams
   Plan.Beams(idxBeam).Layers.Energy = spots.spots(1).energy;
-  Plan.Beams(idxBeam).Layers.nominalSpotPosition = spots.spots(1).xy;
-  Plan.Beams(idxBeam).Layers.SpotPositions = spots.spots(1).xy;
+  if Plan.UseLogSpotPositions
+
+      Plan.Beams(idxBeam).Layers.nominalSpotPosition = spots.spots(1).xy;
+      Plan.Beams(idxBeam).Layers.SpotPositions = spots.spots(1).xy;
+  end
   Plan.Beams(idxBeam).Layers.SpotWeights = spots.spots(1).weight';
   Plan.Beams(idxBeam).Layers.time =  (spots.spots(1).time - 0.5 .* spots.spots(1).effectiveDuration) .* 1000; %convert into ms
   Plan.Beams(idxBeam).Layers.duration = spots.spots(1).effectiveDuration .* 1000; %convert into ms
