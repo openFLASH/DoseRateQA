@@ -44,16 +44,17 @@ fprintf(fid , 'Plan name : %s \n', Plan.name);
 fprintf(fid , 'Plan PatientID : %s \n', PlanData.PatientID);
 fprintf(fid , 'Plan SOPInstanceUID : %s \n', PlanData.SOPInstanceUID);
 fprintf(fid , 'Plan SeriesInstanceUID : %s \n', PlanData.SeriesInstanceUID);
-
-fprintf(fid , 'Log PatientID : %s \n', beamInfoInLogs.mPatientId);
-fprintf(fid , 'Log Plan ID : %s \n', beamInfoInLogs.mPlanId);
-fprintf(fid , 'Log beam ID : %s \n', beamInfoInLogs.mBeamId);
-fprintf(fid , 'Log fraction ID : %s \n', beamInfoInLogs.mFractionId);
-fprintf(fid , 'Log Beam Delivery Point ID : %s \n', beamInfoInLogs.mBeamDeliveryPointId);
-fprintf(fid , 'Log Beam Supply Point ID : %s \n', beamInfoInLogs.mBeamSupplyPointId);
-fprintf(fid , 'Log gantry angle : %d \n', beamInfoInLogs.mGantryAngle);
-fprintf(fid , 'Log irradiation start time : %s \n', string(beamInfoInLogs.START_BEAM_IRRADIATION , 'eeee, MMMM d, yyyy HH:mm:ss.SSS'));
-fprintf(fid , 'Log irradiation end time : %s \n', string(beamInfoInLogs.END_BEAM_IRRADIATION , 'eeee, MMMM d, yyyy HH:mm:ss.SSS'));
+if config.BeamProp.UseIrradiationLog
+    fprintf(fid , 'Log PatientID : %s \n', beamInfoInLogs.mPatientId);
+    fprintf(fid , 'Log Plan ID : %s \n', beamInfoInLogs.mPlanId);
+    fprintf(fid , 'Log beam ID : %s \n', beamInfoInLogs.mBeamId);
+    fprintf(fid , 'Log fraction ID : %s \n', beamInfoInLogs.mFractionId);
+    fprintf(fid , 'Log Beam Delivery Point ID : %s \n', beamInfoInLogs.mBeamDeliveryPointId);
+    fprintf(fid , 'Log Beam Supply Point ID : %s \n', beamInfoInLogs.mBeamSupplyPointId);
+    fprintf(fid , 'Log gantry angle : %d \n', beamInfoInLogs.mGantryAngle);
+    fprintf(fid , 'Log irradiation start time : %s \n', string(beamInfoInLogs.START_BEAM_IRRADIATION , 'eeee, MMMM d, yyyy HH:mm:ss.SSS'));
+    fprintf(fid , 'Log irradiation end time : %s \n', string(beamInfoInLogs.END_BEAM_IRRADIATION , 'eeee, MMMM d, yyyy HH:mm:ss.SSS'));
+end
 
 json=savejson([],config);
 fprintf(fid , '%s \n', json); %Save config data to log file

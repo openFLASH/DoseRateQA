@@ -51,23 +51,10 @@ function   [handles, Plan , beamInfoInLogs] = fC_logAnalysis(config)
 
   %Load irradiation logs
   %---------------------
-  [record_dir,record_file] = fileparts2(config.files.RecordName);
-
-  XDRconverter = fullfile(config.BeamProp.MCsqExecPath , 'data-recorder-proc-PlatfC-R8.FLASH_ER23-deploy.jar');
-  [handles, beamInfoInLogs] = Import_tx_records(record_dir,record_file,'iba','logs',handles,'plan',config.files.AggregatePaintings , 0 , XDRconverter);
-
-  %Convert date (string) into Matlab date format
-  if isfield(beamInfoInLogs , 'START_BEAM_IRRADIATION')
-    beamInfoInLogs.START_BEAM_IRRADIATION = datetime(beamInfoInLogs.START_BEAM_IRRADIATION,'InputFormat','dd/MM/yyyy HH:mm:ss.SSS');
-  end
-  if isfield(beamInfoInLogs , 'END_BEAM_IRRADIATION')
-    beamInfoInLogs.END_BEAM_IRRADIATION   = datetime(beamInfoInLogs.END_BEAM_IRRADIATION,'InputFormat','dd/MM/yyyy HH:mm:ss.SSS');
-  end
-
-  %Compute the dose map
-  %--------------------
-  logID = find(strcmp(handles.plans.name , 'logs')); %identify the logs in handles
-
+  
+  
+  records = [];
+  beamInfoInLogs = struct();
   BeamProp.NbScarves = 1; %umber of scarves to paint on the BEV
   BeamProp.FLAGOptimiseSpotOrder = false; %Do not optimise trajectory. Use the one read from logs
   BeamProp.FLAGcheckSpotOrdering = false; %Check that spot ordering in plan matches scanAlgo output
@@ -80,27 +67,48 @@ function   [handles, Plan , beamInfoInLogs] = fC_logAnalysis(config)
   end
   CEMprop.makeSTL = false;
 
-  %Checking that the info in the log matches the info in the treatment plan
-  setFlashDICOMdict(config.BeamProp.DICOMdict); %If not already defined, load the DICOM dictionary with private FLASH tags
-  monoPlan = dicominfo(config.files.planFileName);
-  validateLogsWithPlan(beamInfoInLogs , config);
-
-
-  %Remove the tuning spots
-  fprintf('Removing tuning spots \n')
-  records = handles.plans.data{logID}{1};
-
-  records.spots.spot_id = records.spots.spot_id(~records.spots.tuning);
-  records.spots.xy = records.spots.xy(~records.spots.tuning , :);
-  records.spots.weight = records.spots.weight(~records.spots.tuning);
-  records.spots.metersetRate = records.spots.metersetRate(~records.spots.tuning);
-  records.spots.timeStart = records.spots.timeStart(~records.spots.tuning);
-  records.spots.timeStop = records.spots.timeStop(~records.spots.tuning);
-  records.spots.time = records.spots.time(~records.spots.tuning);
-  records.spots.duration= records.spots.duration(~records.spots.tuning);
-
-  records.spots.tuning = records.spots.tuning(~records.spots.tuning);
-  records.beamInfoInLogs = beamInfoInLogs;
+  if config.BeamProp.UseIrradiationLog
+      [record_dir,record_file] = fileparts2(config.files.RecordName);
+    
+      XDRconverter = fullfile(config.BeamProp.MCsqExecPath , 'data-recorder-proc-PlatfC-R8.FLASH_ER23-deploy.jar');
+      [handles, beamInfoInLogs] = Import_tx_records(record_dir,record_file,'iba','logs',handles,'plan',config.files.AggregatePaintings , 0 , XDRconverter);
+    
+      %Convert date (string) into Matlab date format
+      if isfield(beamInfoInLogs , 'START_BEAM_IRRADIATION')
+        beamInfoInLogs.START_BEAM_IRRADIATION = datetime(beamInfoInLogs.START_BEAM_IRRADIATION,'InputFormat','dd/MM/yyyy HH:mm:ss.SSS');
+      end
+      if isfield(beamInfoInLogs , 'END_BEAM_IRRADIATION')
+        beamInfoInLogs.END_BEAM_IRRADIATION   = datetime(beamInfoInLogs.END_BEAM_IRRADIATION,'InputFormat','dd/MM/yyyy HH:mm:ss.SSS');
+      end
+    
+      %Compute the dose map
+      %--------------------
+      logID = find(strcmp(handles.plans.name , 'logs')); %identify the logs in handles
+    
+      
+    
+      %Checking that the info in the log matches the info in the treatment plan
+      setFlashDICOMdict(config.BeamProp.DICOMdict); %If not already defined, load the DICOM dictionary with private FLASH tags
+      monoPlan = dicominfo(config.files.planFileName);
+      validateLogsWithPlan(beamInfoInLogs , config);
+    
+    
+      %Remove the tuning spots
+      fprintf('Removing tuning spots \n')
+      records = handles.plans.data{logID}{1};
+    
+      records.spots.spot_id = records.spots.spot_id(~records.spots.tuning);
+      records.spots.xy = records.spots.xy(~records.spots.tuning , :);
+      records.spots.weight = records.spots.weight(~records.spots.tuning);
+      records.spots.metersetRate = records.spots.metersetRate(~records.spots.tuning);
+      records.spots.timeStart = records.spots.timeStart(~records.spots.tuning);
+      records.spots.timeStop = records.spots.timeStop(~records.spots.tuning);
+      records.spots.time = records.spots.time(~records.spots.tuning);
+      records.spots.duration= records.spots.duration(~records.spots.tuning);
+    
+      records.spots.tuning = records.spots.tuning(~records.spots.tuning);
+      records.beamInfoInLogs = beamInfoInLogs;
+  end
 
 
   %Load plan from TPS and create a MIROPT |PLan| structure with the monolayer plan
