@@ -54,7 +54,9 @@ function [Plan , MinDose , MaxDose , DoseOrig] = computeDoseWithCEF(Plan, output
 
     global g_HUair;
     global g_HUbrass;
-    global g_HUcem; %Define HU as a global variable that will be visible inside the function getHighResDose
+    if strcmp(Plan.Mode, 'Conformal Flash')
+        global g_HUcem; %Define HU as a global variable that will be visible inside the function getHighResDose
+    end
     global g_HUrangeshifter;
 
     % Get the Hu value of the material in the table HU_Material_Conversion.txt
@@ -66,7 +68,10 @@ function [Plan , MinDose , MaxDose , DoseOrig] = computeDoseWithCEF(Plan, output
 
     %getMaterialPropCT reads the disk. Only make the reading once and not at every iteration of the loop for each beamlet in order to make computation faster
     g_HUair =  getMaterialPropCT('Schneider_Air' , Plan.ScannerDirectory, fullfile(Plan.MCsqExecPath , 'Materials') ) + 1; %Hounsfield unit associated to air in the material file
-    g_HUcem =  getMaterialPropCT(Plan.Spike.MaterialID , Plan.ScannerDirectory, fullfile(Plan.MCsqExecPath , 'Materials')) + 1 ; %Hounsfield unit associated to CEM in the material file
+    if strcmp(Plan.Mode, 'Conformal Flash')
+        g_HUcem =  getMaterialPropCT(Plan.Spike.MaterialID , Plan.ScannerDirectory, fullfile(Plan.MCsqExecPath , 'Materials')) + 1 ; %Hounsfield unit associated to CEM in the material file
+    end
+    
     g_HUbrass = getMaterialPropCT('Brass' , Plan.ScannerDirectory, fullfile(Plan.MCsqExecPath , 'Materials')) + 1 ; %Hounsfield unit associated to brass in the material file
     g_HUrangeshifter =  getMaterialPropCT(Plan.Beams.RSinfo.RangeShifterMaterial , Plan.ScannerDirectory, fullfile(Plan.MCsqExecPath , 'Materials')) + 1 ; %HU and relative stopping power of the range shifter
         %The g_HUair and g_HUcem and g_HUrangeshifter are now stored in a global variable that is accessible by the sub-function getHighResDose
@@ -415,17 +420,18 @@ end
     %Insert the CEM into the high resolution CT scan
     % Define min and max field so that we do not expand the CT scan in the Xg and Yg direction to fit the CEM
     hrCTName = 'highResCTbev';
-
-    %Check that the field position is aligned with the pixel resolution and origin of CEM
-    a = (minField - Plan.Beams.RangeModulator.ModulatorOrigin(1:2)) ./ Plan.Beams.RangeModulator.Modulator3DPixelSpacing(1:2);
-    b = round( (minField - Plan.Beams.RangeModulator.ModulatorOrigin(1:2)) ./ Plan.Beams.RangeModulator.Modulator3DPixelSpacing(1:2) );
-    if (max(abs(a - b)) > 1e-4)
-      a
-      b
-      a-b
-      error('Small field not aligned with CEM grid')
+    if isfield(Plan.Beams,'RangeModulator')
+        %Check that the field position is aligned with the pixel resolution and origin of CEM
+        a = (minField - Plan.Beams.RangeModulator.ModulatorOrigin(1:2)) ./ Plan.Beams.RangeModulator.Modulator3DPixelSpacing(1:2);
+        b = round( (minField - Plan.Beams.RangeModulator.ModulatorOrigin(1:2)) ./ Plan.Beams.RangeModulator.Modulator3DPixelSpacing(1:2) );
+        if (max(abs(a - b)) > 1e-4)
+          a
+          b
+          a-b
+          error('Small field not aligned with CEM grid')
+        end
     end
-
+    
     % If the HR CT has already been created, we skip its creation and reuse it.
     if ~isfield(handles, 'handlesHR')
        %Generate the high resolution CT scan
@@ -434,14 +440,17 @@ end
         % The Y resolution is 0.5mm. The CEM height is a multiple of 1mm and the rnage shifter are also multiple of 1mm
         % The dose map and original CT scan resolution are coarser tan 0.5mm.
         % Therefore with Z resolution 0.5mm, we can describes the fine structures of the CEM and range shifter.
-        CTresolution = Plan.Beams.RangeModulator.Modulator3DPixelSpacing;
-        CTresolution(3) = 0.5; %mm
+        if isfield(Plan.Beams,'RangeModulator')
+            CTresolution = Plan.Beams.RangeModulator.Modulator3DPixelSpacing;
+            CTresolution(3) = 0.5; %mm
+        else
+            CTresolution = [0.5 0.5 0.5];
+        end
 
         fprintf('Interpolating CT with pixels [%f , %f , %f ] mm \n', CTresolution(1) , CTresolution(2) , CTresolution(3))
 
         % The handles.HR struct is added in the general handles such as to reuse it for each beamlet.
         [handles.handlesHR , BeamHR ] = createHighResCT(handles , CTName , hrCTName , Plan.Beams , CTresolution , g_HUair , minField , maxField , Zdistal , Plan.CTinfo);
-
         PlanHR.Beams = BeamHR;
         PlanHR = copyFields(PlanHR , Plan);
         PlanHR.CTname =  hrCTName;
@@ -451,10 +460,11 @@ end
         fprintf('Adding aperture to high resolution CT\n')
         handles.handlesHR = setApertureinHRCT(handles.handlesHR , PlanHR , hrCTName); %Add an apertrue block in the CT scan
 
-
-        %Add the CEM into the high resolution CT
-        fprintf('Adding CEM to high resolution CT\n')
-        handles.handlesHR = setCEMinhrCT(handles.handlesHR , PlanHR , hrCTName , g_HUcem , g_HUair);
+        if isfield(Plan.Beams,'RangeModulator')
+            %Add the CEM into the high resolution CT
+            fprintf('Adding CEM to high resolution CT\n')
+            handles.handlesHR = setCEMinhrCT(handles.handlesHR , PlanHR , hrCTName , g_HUcem , g_HUair);
+        end
 
         %Add range shifter in the high resolution CT
         %This must be done in the high resolution CT to avoid the RS thickness to be aliased by the Z pixel resolution of the CT
@@ -562,18 +572,20 @@ end
 % in order to avoid aliasing problems when inserting CEM into high reoslution CT
 %------------------------------------
 function [minField , maxField] = getMaxBEVsize(Beam)
-
-      %There is no aperture block. The field size is defined by CEF size
-      [~ , ~ , ~ , BlockBorder] = findApertureBlockSize({}); %Retrieve the border size from this function
-      BlockBorder = rounding([BlockBorder,BlockBorder] , Beam.RangeModulator.Modulator3DPixelSpacing(1:2)); %Round the border to a multiple of the number of voxels
-
-      NbPxlCEF = size(Beam.RangeModulator.CEM3Dmask); %[Nx,Ny,Nz] number of pixels along X and Y IEC gantry
-      SizeCEF = Beam.RangeModulator.Modulator3DPixelSpacing .* (NbPxlCEF - 1); %[Sx,Sy] (mm) dimension of the CEF block along X and Y IEC gantry
-      minCEF = Beam.RangeModulator.ModulatorOrigin; %One point of the main diagonal of the CEF
-      maxCEF = Beam.RangeModulator.ModulatorOrigin + SizeCEF; %Other point of the main diagonal of the CEF
-
-      minField = minCEF(1:2) - BlockBorder; %Add the border which is a multiple of the number of voxels
-      maxField = maxCEF(1:2) + BlockBorder;
+      if isfield (Beam, 'RangeModulator')
+          %There is no aperture block. The field size is defined by CEF size
+          [~ , ~ , ~ , BlockBorder] = findApertureBlockSize({}); %Retrieve the border size from this function
+          BlockBorder = rounding([BlockBorder,BlockBorder] , Beam.RangeModulator.Modulator3DPixelSpacing(1:2)); %Round the border to a multiple of the number of voxels
+    
+          NbPxlCEF = size(Beam.RangeModulator.CEM3Dmask); %[Nx,Ny,Nz] number of pixels along X and Y IEC gantry
+          SizeCEF = Beam.RangeModulator.Modulator3DPixelSpacing .* (NbPxlCEF - 1); %[Sx,Sy] (mm) dimension of the CEF block along X and Y IEC gantry
+          minCEF = Beam.RangeModulator.ModulatorOrigin; %One point of the main diagonal of the CEF
+          maxCEF = Beam.RangeModulator.ModulatorOrigin + SizeCEF; %Other point of the main diagonal of the CEF
+          minField = minCEF(1:2) - BlockBorder; %Add the border which is a multiple of the number of voxels
+          maxField = maxCEF(1:2) + BlockBorder;
+      else
+          [minField , maxField , ~ ,~ ] = findApertureBlockSize(Beam.BlockData);
+      end 
 
 end
 
@@ -634,22 +646,11 @@ end
 % |Zdistal| -_SCLAR_-  Z Coordinate (mm) in the IEC gantry CS of the deepest plane in which the dose is to be computed
 %================================================
 function [iDoseGntX , iDoseGntY , iDoseGntZ ] =  getDoseMapCoordInIECg(Beam , Zdistal , Spacing , ImagePositionPatient , minField , maxField ,  PixelSizeIECg)
-
+   
   %Get the maximum Zg extension of the CEM
   %This will defined one of the maximum extension of the interpolated CT scan
-  switch Beam.RangeModulator.ModulatorMountingPosition
-    case 'SOURCE_SIDE'
-      % The CEM is pointing towards the source.
-      %Add the CEM height to the postion of the base
-      NbPxlCEF = size(Beam.RangeModulator.CEM3Dmask); %[Nx,Ny,Nz] number of pixels along X and Y IEC gantry
-      SizeCEF = Beam.RangeModulator.Modulator3DPixelSpacing .* NbPxlCEF; %[Sx,Sy,Sz] (mm) dimension of the CEM
-      maxCEF = Beam.RangeModulator.IsocenterToRangeModulatorDistance + SizeCEF(3);
-
-    case  'PATIENT_SIDE'
-      %The base of the CEM is at the maximum Zg
-      maxCEF = Beam.RangeModulator.IsocenterToRangeModulatorDistance;
-  end
-
+  maxCEF = getMaxCEF(Beam);
+  
   %Define the coordinate of the voxels in the IEC gantry CS for the interpolated Ct scan
   %Make the dose map a bit larger to be sire to fit all bemalets
   iDoseGntX = (minField(1) - 15 .* PixelSizeIECg(1) )      : PixelSizeIECg(1) : (maxField(1) + 15 .* PixelSizeIECg(1));

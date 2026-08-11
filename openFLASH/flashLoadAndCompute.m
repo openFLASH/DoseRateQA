@@ -109,8 +109,23 @@ if ~isempty(scanAlgoGW)
   Plan.scanAlgoGW.snout_id = scanAlgoGW.snout_id; %TODO get this infor from plan
   Plan.scanAlgoGW.spot_id = scanAlgoGW.spot_id; %TODO get this infor from plan
 end
+switch BeamProp.Mode
 
-[handles, Plan] = parseFLASHplan(planFileName , Plan, handles);
+    case 'Conformal Flash'
+
+        [handles, Plan] = parseFLASHplan(planFileName , Plan, handles);
+
+    case 'Shoot Through'
+
+        Plan.ShootThroughSettings = BeamProp.ShootThroughSettings;
+
+        [handles, Plan] = parsePLDplan(Plan.ShootThroughSettings.PLD , Plan, handles);
+
+    otherwise
+
+        error('Unknown mode: %s', BeamProp.Mode);
+
+end
 
 %If records from logs are provided, then overwrite the spot info in plan
 % with the log records

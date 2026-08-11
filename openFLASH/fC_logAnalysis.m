@@ -30,8 +30,14 @@ function   [handles, Plan , beamInfoInLogs] = fC_logAnalysis(config)
   % Load the JSON file with the parameters for the computation
   %-----------------------------------------------------------
   %config = loadjson(configFile)
-
-  RSplanFileName = config.files.planFileName;
+  switch config.Mode
+      case 'Shoot Through'
+          RSplanFileName = config.ShootThrough.PLD;
+      case 'Conformal Flash'
+          RSplanFileName = config.files.planFileName;
+      otherwise
+          error('Unknown mode: %s', config.Mode);
+  end
   CTname = config.files.CTname;
   rtstructFileName = config.files.rtstructFileName;
 
@@ -46,8 +52,16 @@ function   [handles, Plan , beamInfoInLogs] = fC_logAnalysis(config)
 
   %Load reference plan from TPS
   %----------------------------
-  [plan_dir,plan_file] = fileparts2(config.files.planFileName);
-  handles= Import_plan(plan_dir,plan_file,'dcm','plan', handles);
+  [plan_dir,plan_file] = fileparts2(RSplanFileName);
+
+  switch config.Mode
+      case 'Shoot Through'
+          handles= Import_plan(plan_dir,plan_file,'pld','plan', handles);
+      case 'Conformal Flash'
+          handles= Import_plan(plan_dir,plan_file,'dcm','plan', handles);
+      otherwise
+          error('Unknown mode: %s', config.Mode);
+  end
 
   %Load irradiation logs
   %---------------------
@@ -60,6 +74,10 @@ function   [handles, Plan , beamInfoInLogs] = fC_logAnalysis(config)
   BeamProp.FLAGcheckSpotOrdering = false; %Check that spot ordering in plan matches scanAlgo output
 
   BeamProp = copyFields(config.BeamProp , BeamProp);
+  BeamProp.Mode = config.Mode;
+  if strcmp(config.Mode,'Shoot Through')
+    BeamProp.ShootThroughSettings = config.ShootThrough;
+  end
   BeamProp.CEFDoseGrid =  num2cell(BeamProp.CEFDoseGrid);
   if isfield(config.RTstruct , 'DRPercentile')
     %If the percentile is provided copy it.

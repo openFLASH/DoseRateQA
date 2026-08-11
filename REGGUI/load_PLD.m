@@ -104,10 +104,12 @@ myBeamData{1}.table_angle = table_angle;
 myBeamData{1}.final_weight = 0;
 myBeamData{1}.spots = [];
 
+
 fid = fopen(plan_filename,'r');
 headline = fgetl(fid);
 tokens = strsplit(headline,',');
 myBeamData{1}.name = tokens{7};
+myBeamData{1}.PlanLabel = tokens{6};
 
 layer = 0;
 spot = 0;

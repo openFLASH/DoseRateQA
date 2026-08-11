@@ -16,6 +16,7 @@
 function DADR = doseAveragedDoseRate(Dose , spotTimingStart, spotTimingStop)
     nBPxl = size(Dose,2);
     dT = spotTimingStop - spotTimingStart; %dT(spot) Time to deliver i-th spot
+    dT = double(dT);
     DR = Dose ./ repmat(dT', 1,nBPxl); % DR(spot,pxl) Dose rate at pxl-th voxel and for delivery of spot
     Dtot = sum(Dose,1); %Dtot(pxl) Total dose delivered at pixel |pxl|
     DADR = 1000 .* sum(DR .* Dose ,1) ./ Dtot; %Convert into Gy/s from ms
