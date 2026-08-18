@@ -157,7 +157,7 @@ function [handles, Plan] = parsePLDplan(planFileName , Plan, handles)
 
         %Get snout information
         %---------------------
-        Plan.Beams(b).SnoutID = 'FLASH_Snout_S';
+        Plan.Beams(b).SnoutID = Plan.ShootThroughSettings.SnoutType;
         % if ~strcmp(Plan.Beams(b).SnoutID , 'FLASH_Snout_S')
         %   fprintf('SnoutID in the plan : %s \n',Plan.Beams(b).SnoutID)
         %   warning('This is not a FLASH snout. Overwriting snout ID')
@@ -173,9 +173,9 @@ function [handles, Plan] = parsePLDplan(planFileName , Plan, handles)
               %There is a range shifter
               Plan.Beams(b).RSinfo = struct;
               snout = getParamSnout(Plan.Beams(b).SnoutID);
-              Plan.Beams(b).RSinfo.NbSlabs = Plan.ShootThroughSettings.NRS;
-              Plan.Beams(b).RSinfo.RangeShifterID = snout.AccessoryCode(Plan.Beams(b).RSinfo.NbSlabs);
+              Plan.Beams(b).RSinfo.RangeShifterID = Plan.ShootThroughSettings.AccessoryCode;
               Plan.Beams(b).RSinfo.RSslabThickness = snout.RSslabThickness(snout.RangeShifterSlabs(Plan.Beams(b).RSinfo.RangeShifterID));
+              Plan.Beams(b).RSinfo.NbSlabs = numel(find(Plan.Beams(b).RSinfo.RSslabThickness));
               Plan.Beams(b).RSinfo.RangeShifterType = snout.RangeShifterType;
               Plan.Beams(b).RSinfo.SlabOffset = snout.RangeShifterOffset(1:Plan.Beams(b).RSinfo.NbSlabs) - snout.RangeShifterOffset(1) + Plan.Beams(b).RSinfo.RSslabThickness(1) ; %Offset from |IsocenterToRangeShifterDistance| and the upstream side of the i-th slab
               fprintf('Range shifter thickness : %f mm \n', Plan.Beams(b).RSinfo.RSslabThickness)
