@@ -73,7 +73,9 @@ function [Plan , MinDose , MaxDose , DoseOrig] = computeDoseWithCEF(Plan, output
     end
     
     g_HUbrass = getMaterialPropCT('Brass' , Plan.ScannerDirectory, fullfile(Plan.MCsqExecPath , 'Materials')) + 1 ; %Hounsfield unit associated to brass in the material file
-    g_HUrangeshifter =  getMaterialPropCT(Plan.Beams.RSinfo.RangeShifterMaterial , Plan.ScannerDirectory, fullfile(Plan.MCsqExecPath , 'Materials')) + 1 ; %HU and relative stopping power of the range shifter
+    if isfield(Plan.Beams,'RSinfo')
+        g_HUrangeshifter =  getMaterialPropCT(Plan.Beams.RSinfo.RangeShifterMaterial , Plan.ScannerDirectory, fullfile(Plan.MCsqExecPath , 'Materials')) + 1 ; %HU and relative stopping power of the range shifter
+    end    
         %The g_HUair and g_HUcem and g_HUrangeshifter are now stored in a global variable that is accessible by the sub-function getHighResDose
 
     %Make some sanity check on the treatment plan
@@ -583,8 +585,13 @@ function [minField , maxField] = getMaxBEVsize(Beam)
           maxCEF = Beam.RangeModulator.ModulatorOrigin + SizeCEF; %Other point of the main diagonal of the CEF
           minField = minCEF(1:2) - BlockBorder; %Add the border which is a multiple of the number of voxels
           maxField = maxCEF(1:2) + BlockBorder;
-      else
+      elseif Beam.ApertureBlock==1
           [minField , maxField , ~ ,~ ] = findApertureBlockSize(Beam.BlockData);
+      else
+          SpotPositions = Beam.Layers(1).SpotPositions;
+          BlockBorder = 50;
+          minField = min(SpotPositions,[],1) - BlockBorder;
+          maxField = max(SpotPositions,[],1) + BlockBorder;
       end 
 
 end

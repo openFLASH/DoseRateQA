@@ -35,31 +35,14 @@ function [handles, Plan] = parsePLDplan(planFileName , Plan, handles)
     %------------------------------
     for b = 1:NbBeams
 
-        itemBeam = sprintf('Item_%i',b);
-
-        %--Begin modification to have the same structure as parseFLASHplzn for the spots
+        % Build energy layers from PLD spots 
         spotsPLD = data{b}.spots;
-        E = [spotsPLD.energy];
-        uniqueE = unique(E);
-        
-        NbLayers = length(uniqueE);
-        
-        clear Layers
-        
-        for e = 1:NbLayers
-        
-            idx = E == uniqueE(e);
-        
-            Layers(e).energy = uniqueE(e);
-            Layers(e).xy = vertcat(spotsPLD(idx).xy);
-            Layers(e).weight = [spotsPLD(idx).weight];
-        
-        end
+        Layers = buildPLDLayers(spotsPLD);
+        NbLayers = numel(Layers);
          %Retrieve the machine name in the BDL 
         [Plan.MachineType , Plan.Machine.name] = getMachineFromBDL(Plan.BDL);
 
         Plan.MachineNameDICOM = Plan.Machine.name;
-        % end modification
 
         Plan.Beams(b).GantryAngle = data{b}.gantry_angle;
         Plan.Beams(b).PatientSupportAngle = data{b}.table_angle;
@@ -75,22 +58,22 @@ function [handles, Plan] = parsePLDplan(planFileName , Plan, handles)
         end
 
         %Create the beam structure in the Plan
-        %--------------------------------------
-        for e = 1:NbLayers
-            Plan.Beams(b).Layers(e).Energy = Layers(e).energy;
-            Plan.Beams(b).Layers(e).nominalSpotPosition = Layers(e).xy;
-            Plan.Beams(b).Layers(e).SpotPositions = Layers(e).xy;
-            Plan.Beams(b).Layers(e).SpotWeights = (Layers(e).weight)' ; %This is understood as the weight PER fraction by MIROPT
+        for layerIdx = 1:NbLayers
+            Plan.Beams(b).Layers(layerIdx).Energy = Layers(layerIdx).energy;
+            Plan.Beams(b).Layers(layerIdx).nominalSpotPosition = Layers(layerIdx).xy;
+            Plan.Beams(b).Layers(layerIdx).SpotPositions = Layers(layerIdx).xy;
+            Plan.Beams(b).Layers(layerIdx).SpotWeights = (Layers(layerIdx).weight)' ; %This is understood as the weight PER fraction by MIROPT
                           % If the BDL is different in MIROPT and RayStation some rescaling of the MU definition will be required using the doseMeterSet tag
-            minW = min(Layers(e).weight);
-            maxW = max(Layers(e).weight);
+            minW = min(Layers(layerIdx).weight);
+            maxW = max(Layers(layerIdx).weight);
             if Plan.showGraph
                 figure(100+b)
-                scatter(Layers(e).xy(:,1),Layers(e).xy(:,2) , 50 , round(255.*(Layers(e).weight-minW) ./ (maxW-minW)) , 'filled')
+                scatter(Layers(layerIdx).xy(:,1),Layers(layerIdx).xy(:,2) , 50 , round(255.*(Layers(layerIdx).weight-minW) ./ (maxW-minW)) , 'filled')
                 hold on
             end
         end
 
+        % Display spot map
         if Plan.showGraph
             hcb = colorbar;
             set(get(hcb,'Title'),'String','Spot charge (AU)')
@@ -104,6 +87,7 @@ function [handles, Plan] = parsePLDplan(planFileName , Plan, handles)
             drawnow
         end
 
+        % Configure beam current
         physicsConstants;
         maxE =max([Plan.Beams(b).Layers(:).Energy]);
         ChargePerMU = MU_to_NumProtons(1, maxE) .* eV; %Cb per MU
@@ -115,45 +99,9 @@ function [handles, Plan] = parsePLDplan(planFileName , Plan, handles)
         end
         fprintf('Proton beam current (theoretical, not used for log-based) : %f nA\n', Plan.Inozzle)
 
-        %Read the aperture data
-        %-------------------------------
-        Plan.Beams(b).ApertureBlock = 1;  %there is an aperture from the ShootThrough interface  
-        Plan.Beams(b).BlockMountingPosition = 'PATIENT_SIDE';
-        Plan.Beams(b).BlockMaterialID = 'BRASS';
-        Plan.Beams(b).BlockThickness = Plan.ShootThroughSettings.ApertureThickness;  %mm
-        Plan.Beams(b).IsocenterToBlockTrayDistance = Plan.ShootThroughSettings.SnoutPosition;
-        switch Plan.ShootThroughSettings.Shape
-            case 'Circle'
-                r = Plan.ShootThroughSettings.Radius;
-                theta = linspace(0,2*pi,100);
-
-                x = r*cos(theta);
-                y = r*sin(theta);
-                Plan.Beams(b).BlockData{1} = [x(:) y(:)];
-    
-            case 'Rectangle'
-                w = Plan.ShootThroughSettings.Width/2;
-                h = Plan.ShootThroughSettings.Height/2;
-
-                Plan.Beams(b).BlockData{1} = [ ...
-                     w   h ;
-                     w  -h ;
-                    -w  -h ;
-                    -w   h ;
-                     w   h ];
-
-                    
-
-        end
-        if Plan.showGraph
-            figure(100+b)
-            hold on
-            plot(Plan.Beams(b).BlockData{1}(:,1),Plan.Beams(b).BlockData{1}(:,2), '-r');
-            hold off
-            drawnow
-        end
-
-
+        % Add aperture information
+        % ----------------------
+        Plan = addApertureInformation(Plan, b, Plan.ShootThroughSettings, Plan.showGraph);
 
         %Get snout information
         %---------------------
@@ -166,31 +114,147 @@ function [handles, Plan] = parsePLDplan(planFileName , Plan, handles)
         %The plan defines the snout position on the UPSTREAM side of the aperture block
         Plan.Beams(b).SnoutPosition = Plan.ShootThroughSettings.SnoutPosition;
 
-        %Define range shifter properties
+        % Range shifter configuration
         %-------------------------------
-        Plan.Beams(b).NumberOfRangeShifters = 1;
-        if Plan.Beams(b).NumberOfRangeShifters
-              %There is a range shifter
-              Plan.Beams(b).RSinfo = struct;
-              snout = getParamSnout(Plan.Beams(b).SnoutID);
-              Plan.Beams(b).RSinfo.RangeShifterID = Plan.ShootThroughSettings.AccessoryCode;
-              Plan.Beams(b).RSinfo.RSslabThickness = snout.RSslabThickness(snout.RangeShifterSlabs(Plan.Beams(b).RSinfo.RangeShifterID));
-              Plan.Beams(b).RSinfo.NbSlabs = numel(find(Plan.Beams(b).RSinfo.RSslabThickness));
-              Plan.Beams(b).RSinfo.RangeShifterType = snout.RangeShifterType;
-              Plan.Beams(b).RSinfo.SlabOffset = snout.RangeShifterOffset(1:Plan.Beams(b).RSinfo.NbSlabs) - snout.RangeShifterOffset(1) + Plan.Beams(b).RSinfo.RSslabThickness(1) ; %Offset from |IsocenterToRangeShifterDistance| and the upstream side of the i-th slab
-              fprintf('Range shifter thickness : %f mm \n', Plan.Beams(b).RSinfo.RSslabThickness)
-              fprintf('Number of slabs : %d \n', Plan.Beams(b).RSinfo.NbSlabs)
-              if Plan.Beams(b).RSinfo.NbSlabs ~=0
-                  Plan.Beams(b).RSinfo.IsocenterToRangeShifterDistance = Plan.Beams(b).SnoutPosition + snout.RangeShifterOffset(1)-Plan.Beams(b).RSinfo.RSslabThickness(1); %Distance from isocenter to downstream surface of range shifter
-              else
-                  printf('No slabs in the range shifter')
-              end
-              Plan.Beams(b).RSinfo.RangeShifterSetting = 'IN';
-              Plan.Beams(b).RSinfo.RangeShifterMaterial = snout.RangeShifterMaterial;
-              fprintf('Range shifter material : %s \n', Plan.Beams(b).RSinfo.RangeShifterMaterial)
-              Plan.Beams(b).RSinfo.RangeShifterWET=NaN;
-        end
+        Plan = addRangeShifterInformation(Plan, b, Plan.ShootThroughSettings);
+
       Plan.Beams(b).spotSigma = 10; %mm It is only used to determine neighbourgh spots. The exact value is not too critical
 
     end %for b
+end
+
+
+function Plan = addApertureInformation(Plan, beamIdx, settings, showGraph)
+    % Create aperture geometry from Shoot Through settings.
+    if settings.UseAperture       
+        Plan.Beams(beamIdx).ApertureBlock = 1;
+        Plan.Beams(beamIdx).BlockMountingPosition = 'PATIENT_SIDE';
+        Plan.Beams(beamIdx).BlockMaterialID = 'BRASS';
+        Plan.Beams(beamIdx).BlockThickness = settings.ApertureThickness;
+        Plan.Beams(beamIdx).IsocenterToBlockTrayDistance = settings.SnoutPosition;
+
+        switch settings.Shape
+
+            case 'Circle'
+
+                radius = settings.Radius;
+                theta = linspace(0,2*pi,100);
+
+                x = radius*cos(theta);
+                y = radius*sin(theta);
+
+                Plan.Beams(beamIdx).BlockData{1} = [x(:) y(:)];
+
+            case 'Rectangle'
+
+                w = settings.Width/2;
+                h = settings.Height/2;
+
+                Plan.Beams(beamIdx).BlockData{1} = [ ...
+                     w   h ;
+                     w  -h ;
+                    -w  -h ;
+                    -w   h ;
+                     w   h ];
+
+        end
+
+        if showGraph
+            figure(100+beamIdx)
+            hold on
+            plot(Plan.Beams(beamIdx).BlockData{1}(:,1), Plan.Beams(beamIdx).BlockData{1}(:,2), '-r');
+            hold off
+            drawnow
+        end
+
+    else
+
+        Plan.Beams(beamIdx).ApertureBlock = 0;
+
+    end
+
+end
+
+function Layers = buildPLDLayers(spotsPLD)
+    % Group PLD spots into energy layers.
+    % All spots sharing the same energy are merged into a single layer.
+    spotEnergies = [spotsPLD.energy];
+    uniqueEnergies = unique(spotEnergies);
+    NbLayers = length(uniqueEnergies);
+
+    for layerIdx = 1:NbLayers
+
+        currentEnergy = uniqueEnergies(layerIdx);
+
+        spotMask = spotEnergies == currentEnergy;
+
+        Layers(layerIdx).energy = currentEnergy;
+        Layers(layerIdx).xy = vertcat(spotsPLD(spotMask).xy);
+        Layers(layerIdx).weight = [spotsPLD(spotMask).weight];
+
+    end
+
+end
+
+function Plan = addRangeShifterInformation(Plan, beamIdx,  settings)
+    % Populate range shifter information using the selected
+    % accessory and snout configuration.
+
+    Plan.Beams(beamIdx).NumberOfRangeShifters = settings.UseRangeShifter;
+
+    if Plan.Beams(beamIdx).NumberOfRangeShifters
+
+        % There is a range shifter
+        Plan.Beams(beamIdx).RSinfo = struct;
+
+        snout = getParamSnout(Plan.Beams(beamIdx).SnoutID);
+
+        Plan.Beams(beamIdx).RSinfo.RangeShifterID = settings.AccessoryCode;
+
+        Plan.Beams(beamIdx).RSinfo.RSslabThickness = ...
+            snout.RSslabThickness( ...
+            snout.RangeShifterSlabs(Plan.Beams(beamIdx).RSinfo.RangeShifterID));
+
+        Plan.Beams(beamIdx).RSinfo.NbSlabs = ...
+            numel(find(Plan.Beams(beamIdx).RSinfo.RSslabThickness));
+
+        Plan.Beams(beamIdx).RSinfo.RangeShifterType = ...
+            snout.RangeShifterType;
+
+        Plan.Beams(beamIdx).RSinfo.SlabOffset = ...
+            snout.RangeShifterOffset(1:Plan.Beams(beamIdx).RSinfo.NbSlabs) ...
+            - snout.RangeShifterOffset(1) ...
+            + Plan.Beams(beamIdx).RSinfo.RSslabThickness(1);
+
+        fprintf('Range shifter thickness : %f mm\n', ...
+            Plan.Beams(beamIdx).RSinfo.RSslabThickness)
+
+        fprintf('Number of slabs : %d\n', ...
+            Plan.Beams(beamIdx).RSinfo.NbSlabs)
+
+        if Plan.Beams(beamIdx).RSinfo.NbSlabs ~= 0
+
+            Plan.Beams(beamIdx).RSinfo.IsocenterToRangeShifterDistance = ...
+                Plan.Beams(beamIdx).SnoutPosition ...
+                + snout.RangeShifterOffset(1) ...
+                - Plan.Beams(beamIdx).RSinfo.RSslabThickness(1);
+
+        else
+
+            printf('No slabs in the range shifter')
+
+        end
+
+        Plan.Beams(beamIdx).RSinfo.RangeShifterSetting = 'IN';
+
+        Plan.Beams(beamIdx).RSinfo.RangeShifterMaterial = ...
+            snout.RangeShifterMaterial;
+
+        fprintf('Range shifter material : %s\n', ...
+            Plan.Beams(beamIdx).RSinfo.RangeShifterMaterial)
+
+        Plan.Beams(beamIdx).RSinfo.RangeShifterWET = NaN;
+
+    end
+
 end
