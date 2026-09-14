@@ -142,12 +142,12 @@ function [handles, Plan] = parseFLASHplan(planFileName , Plan, handles)
               Plan.Inozzle = monoPlan.IonBeamSequence.(itemBeam).IonControlPointSequence.Item_1.MetersetRate .* ChargePerMU .* 1e9 ./ 60; %Proton beam current (nA)
             else
               warning('Plan is missing MetersetRate. Using default value.')
-              paramDefault = getMachineParam(Plan.BDL)
+              paramDefault = getMachineParam(Plan.BDL);
               Plan.Inozzle = paramDefault.MAXcurrent .* 1000; %nA (convert uA into nA)
             end
-          else
+         else
             fprintf('Inozzle already defined in variable Plan \n')
-          end
+         end
         fprintf('Proton beam current (theoretical, not used for log-based) : %f nA \n', Plan.Inozzle)
 
 

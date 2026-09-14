@@ -36,14 +36,15 @@ DateStart = string(datetime('now'));
 [handles, Plan , beamInfoInLogs] = fC_logAnalysis(config);
 
 %Create a log file and save results
-PlanData = dicominfo(config.files.planFileName);
-
 fid = fopen(fullfile(config.files.output_path , 'Outputs' , 'Results.txt') , 'w');
+if ~isempty(config.files.planFileName)
+    PlanData = dicominfo(config.files.planFileName);
+    fprintf(fid , 'Plan PatientID : %s \n', PlanData.PatientID);
+    fprintf(fid , 'Plan SOPInstanceUID : %s \n', PlanData.SOPInstanceUID);
+    fprintf(fid , 'Plan SeriesInstanceUID : %s \n', PlanData.SeriesInstanceUID);
+end
 fprintf(fid , 'Date (start) : %s \n', DateStart);
 fprintf(fid , 'Plan name : %s \n', Plan.name);
-fprintf(fid , 'Plan PatientID : %s \n', PlanData.PatientID);
-fprintf(fid , 'Plan SOPInstanceUID : %s \n', PlanData.SOPInstanceUID);
-fprintf(fid , 'Plan SeriesInstanceUID : %s \n', PlanData.SeriesInstanceUID);
 if config.BeamProp.UseIrradiationLog
     fprintf(fid , 'Log PatientID : %s \n', beamInfoInLogs.mPatientId);
     fprintf(fid , 'Log Plan ID : %s \n', beamInfoInLogs.mPlanId);

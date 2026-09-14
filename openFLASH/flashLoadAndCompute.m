@@ -203,10 +203,13 @@ else
 
     else
       %No spot timing provided. We will compute the trajectory using the simple model or scanAlgo
-      Plan.SpotTrajectoryInfo.beam{b}.Nmaps = getTopologicalMaps(sobpPosition{b} , Plan.BDL , Plan.Beams(b).spotSigma(b) , scanAlgoGW); %Get the inital topological map;
+      if isfield(BeamProp,'xspeed') && isfield(BeamProp,'yspeed') && BeamProp.xspeed > 0 && BeamProp.yspeed > 0
+          Plan.SpotTrajectoryInfo.beam{b}.Nmaps = getTopologicalMaps(sobpPosition{b} , Plan.BDL , Plan.Beams(b).spotSigma(b), scanAlgoGW, BeamProp.xspeed, BeamProp.yspeed); %Get the topological map to be used for the MPDR
+      else
+          Plan.SpotTrajectoryInfo.beam{b}.Nmaps = getTopologicalMaps(sobpPosition{b}, Plan.BDL, Plan.Beams(b).spotSigma(b), scanAlgoGW);
+      end
       Plan.SpotTrajectoryInfo.TimingMode = 'Model'; %The spot timing is from a model
     end
-
     if Plan.showGraph
       figure(100+b)
       hold on

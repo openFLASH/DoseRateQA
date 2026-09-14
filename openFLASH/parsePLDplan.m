@@ -68,7 +68,12 @@ function [handles, Plan] = parsePLDplan(planFileName , Plan, handles)
             maxW = max(Layers(layerIdx).weight);
             if Plan.showGraph
                 figure(100+b)
-                scatter(Layers(layerIdx).xy(:,1),Layers(layerIdx).xy(:,2) , 50 , round(255.*(Layers(layerIdx).weight-minW) ./ (maxW-minW)) , 'filled')
+                if maxW == minW
+                    c = ones(size(Layers(layerIdx).weight));
+                else
+                    c = (Layers(layerIdx).weight-minW)/(maxW-minW);
+                end
+                scatter(Layers(layerIdx).xy(:,1), Layers(layerIdx).xy(:,2), 50, c, 'filled')
                 hold on
             end
         end

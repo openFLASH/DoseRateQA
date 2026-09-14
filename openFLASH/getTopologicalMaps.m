@@ -32,7 +32,7 @@
 %% Contributors
 % Authors : R. Labarbe (open.reggui@gmail.com)
 
-function Nmaps = getTopologicalMaps(spot , BDL , sigmaAtIso , scanAlgoGW)
+function Nmaps = getTopologicalMaps(spot , BDL , sigmaAtIso , scanAlgoGW, xspeed, yspeed)
 
   if nargin < 4
     scanAlgoGW = struct;
@@ -49,7 +49,7 @@ function Nmaps = getTopologicalMaps(spot , BDL , sigmaAtIso , scanAlgoGW)
     return
   end
 
-  DistMat = interSpotDistance(spot);
+  [DistMat, Dx , Dy] = interSpotDistance(spot);
   NeighbourghWeightMap = exp(-(DistMat ./ sigmaAtIso).^2); % dose delivered by Gaussian tail to other locations
   Nmaps.NeighbourghMap = (NeighbourghWeightMap >= 0.001); %Define a neghboug only if it contributes to dose
   Nmaps.NeighbourghWeightMap = NeighbourghWeightMap .* Nmaps.NeighbourghMap; %Set to zero Gaussian tail < 0.1%
@@ -63,7 +63,18 @@ function Nmaps = getTopologicalMaps(spot , BDL , sigmaAtIso , scanAlgoGW)
   else
     %Use an approximation of the timing and scanning speed
     param = getMachineParam(BDL);
-    Nmaps.NeighbourghTimeMap = 1000 .* DistMat ./ param.ScanSpeed;
+    if nargin >= 5 && ~isempty(xspeed)
+        xSpeedUsed = xspeed;
+    else
+        xSpeedUsed = param.ScanSpeed;
+    end
+    if nargin >= 6 && ~isempty(yspeed)
+        ySpeedUsed = yspeed;
+    else
+        ySpeedUsed = param.ScanSpeed;
+    end
+    %Nmaps.NeighbourghTimeMap = 1000 .* DistMat ./ param.ScanSpeed;
+    Nmaps.NeighbourghTimeMap = 1000 .* max(abs(Dx) ./ xSpeedUsed, abs(Dy)./ ySpeedUsed);
   end
 
 end
